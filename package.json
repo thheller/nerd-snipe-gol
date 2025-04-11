@@ -1,0 +1,15 @@
+{
+  "name": "nerd-snipe-gol",
+  "version": "1.0.0",
+  "description": "```bash clojure -Srepro -T:build uber ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "shadow-cljs": "^2.28.23"
+  }
+}

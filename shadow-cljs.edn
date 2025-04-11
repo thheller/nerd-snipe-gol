@@ -1,0 +1,13 @@
+{:deps {:aliases [:dev]}
+
+ :builds
+ {:app
+  {:target :esm
+   :output-dir "public/js"
+   :modules {:main {:init-fn app.basically-js/init}}}
+
+  :grove-app
+  {:target :esm
+   :output-dir "public/js"
+   :modules {:main {:init-fn app.grove/init}}}}
+ }

@@ -1,0 +1,38 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+
+    --board-size: 50;
+}
+
+.main {
+    padding: 20px;
+}
+
+.board {
+    background: black;
+    display: inline-grid;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    gap: 0px;
+    grid-template-columns: repeat(var(--board-size, 50), 1fr);
+    grid-template-rows: repeat(var(--board-size, 50), 1fr);
+    width: calc(10px * var(--board-size, 50) +1px);
+    height: calc(10px *  var(--board-size, 50) +1px);
+}
+
+.tile {
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    background-color: white;
+    transition: background 0.4s ease;
+}
