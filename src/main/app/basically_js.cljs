@@ -4,26 +4,20 @@
 
 (defn init []
   (let [root (js/document.getElementById "root")
-
         board-size (js/parseInt (.getAttribute root "data-size") 10)
         sid (.getAttribute root "data-sid")
         total (* board-size board-size)
-        cells (js/Array.)
-        state (-> (js/Array. total) (.fill "dead"))]
+        state (-> (js/Array. total) (.fill "dead"))
+        cells (.map state
+                (fn [_ idx]
+                  (doto (js/document.createElement "div")
+                    (set! -className "tile")
+                    (.addEventListener "click"
+                      (fn [e]
+                        ;; don't care about result for now, updates come from sse
+                        (js/fetch (str "/hit?sid=" sid "&idx=" idx)))))))]
 
-    (loop [idx 0]
-      (when (< idx total)
-        (let [node (doto (js/document.createElement "div")
-                     (set! -className "tile"))]
-          ;; could be attaching to root. attaching a handler per div on purpose to show how little it matters
-          (.addEventListener node "click"
-            (fn [e]
-              ;; don't care about result for now, updates come from sse
-              (js/fetch (str "/hit?sid=" sid "&idx=" idx))))
-
-          (.push cells node)
-          (.append root node)
-          (recur (inc idx)))))
+    (.forEach cells #(.append root %))
 
     ;; can't be bothered to swap this to the azure thing, but that would be trivial
     (let [sse (js/EventSource. (str "/connect?sid=" sid))]
